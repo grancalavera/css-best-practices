@@ -72,7 +72,7 @@ _Brute forcing:_
 
 _Dangerous selectors:_ selectors with far too broad reach, like applying a very specific selector to all `div` elements.
 
-_Reactive `!important`: 
+_Reactive `!important`:
 
 > "`!important` should only ever be used proactively, not reactively."
 
@@ -84,7 +84,7 @@ Like when you know (beforehand) that something should always **always** take pre
 }
 ```
 
-_Reactive `!important`: using `!important` to get out of a specific problem, forcing thing in reaction to an issue, is a bad thing.
+_Reactive_ `!important`: using `!important` to get out of a specific problem, forcing thing in reaction to an issue, is a bad thing.
 
 _IDs:_ basically… never use them (but see: http://css-tricks.com/bad-code-dogmatism-etc)
 
@@ -101,7 +101,7 @@ _The first problem:_ ambiguity 
 
 _The second problem:_ can be far to common and prone to be reassigned/redefined.
 
-_Loose class names:_ 
+_Loose class names:_
 
 > All this can be avoided by using much stricter class names. Classes like `card` and `.user` and suchlike are far too loose, making them hard to quickly understand, and easy to accidentally reuse/override."
 
