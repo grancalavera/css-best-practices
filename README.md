@@ -20,25 +20,33 @@ Large projects that spans for years where maintainability is a real issue:
 
 ### Smells
 
-_Undoing styles (apart from in a reset):_ Well done CSS should inherit and cascade from previously things defined. Inherit, never undo, having to remove styles might mean that you applied them too early. <i>"As soon as I see CSS that undoes previous styling, I can be pretty sure that it’s because something was poorly architected and that the order in which things were built/written needs a rework."
+Undoing styles (apart from in a reset): 
 
-_Magic numbers:_ a value that is used 'because it just works' (see the 36px example for the top style on the drop down). Since 'it just works', it is hard to communicate to other developers where the number came from, when someone else is working in our code, then can either delete the magic number (back to square one) or just work her way around it (hacking on top of a hack, increasing the entropy in the code, see http://pragprog.com/the-pragmatic-programmer/extracts/software-entropy.
+Well done CSS should inherit and cascade from previously things defined. Inherit, never undo, having to remove styles might mean that you applied them too early. <i>"As soon as I see CSS that undoes previous styling, I can be pretty sure that it’s because something was poorly architected and that the order in which things were built/written needs a rework."
+
+Magic numbers: 
+
+a value that is used 'because it just works' (see the 36px example for the top style on the drop down). Since 'it just works', it is hard to communicate to other developers where the number came from, when someone else is working in our code, then can either delete the magic number (back to square one) or just work her way around it (hacking on top of a hack, increasing the entropy in the code, see http://pragprog.com/the-pragmatic-programmer/extracts/software-entropy.
 
 > "As soon as I see magic numbers in CSS I start asking questions. Why is this here? What does it do? Why does that number work? How can you achieve the same without that magic number?"
 
-_Qualified selectors_: Selectors who are needlessly prepended to an element, like:
+Qualified selectors: 
+
+Selectors who are needlessly prepended to an element, like:
 
     ul.nav{}
     a.button{}
     div.header{}
 
-_Qualified selectors are bad because:_
+Qualified selectors are bad because:
 
 - They totally inhibit reusability on another element
 - They increase specificity
 - They increase browser workload
 
-_Instead of qualified selectors:_ use (which can be applied to different elements and facilitates swapping styles when the markup of the site changes):
+Instead of qualified selectors:
+
+use (which can be applied to different elements and facilitates swapping styles when the markup of the site changes):
 
 ``` css
 .nav{}
@@ -46,7 +54,9 @@ _Instead of qualified selectors:_ use (which can be applied to different element
 .header{}
 ```
 
-_Hard coded absolute values:_ The only example is the absolute value on the line height, which should use a relative value of `1.333`:
+Hard coded absolute values:
+
+The only example is the absolute value on the line height, which should use a relative value of `1.333`:
 
 ```
     line-height: 1.333;
@@ -56,7 +66,7 @@ _Hard coded absolute values:_ The only example is the absolute value on the line
 > "Hard-coded values are not very future proof, flexible or forgiving, and thus should be avoided. The only things that should ever really have hard-coded values are things like sprites which will always need to be a certain size no matter what. As soon as I see a hard-coded unit in a stylesheet I want to know why it was required and how it could be avoided."
 
 
-_Brute forcing:_
+Brute forcing:
 
 > "This one is in a similar vein to hard-coded numbers, but a little more specific. Brute forcing CSS is when you use hard-coded magic numbers and a variety of other techniques to force a layout to work."
 
@@ -70,9 +80,11 @@ _Brute forcing:_
 }
 ```
 
-_Dangerous selectors:_ selectors with far too broad reach, like applying a very specific selector to all `div` elements.
+Dangerous selectors:
 
-_Reactive_ `!important`:
+selectors with far too broad reach, like applying a very specific selector to all `div` elements.
+
+Reactive `!important`:
 
 > "`!important` should only ever be used proactively, not reactively."
 
@@ -84,24 +96,34 @@ Like when you know (beforehand) that something should always **always** take pre
 }
 ```
 
-_Reactive_ `!important`: using `!important` to get out of a specific problem, forcing thing in reaction to an issue, is a bad thing.
+Reactive `!important`: 
 
-_IDs:_ basically… never use them (but see: http://css-tricks.com/bad-code-dogmatism-etc)
+using `!important` to get out of a specific problem, forcing thing in reaction to an issue, is a bad thing.
+
+IDs:
+
+basically… never use them (but see: http://css-tricks.com/bad-code-dogmatism-etc)
 
 An ID is 255 times more specific than one class… "http://codepen.io/chriscoyier/pen/lzjqh This means you’d need 256 chained classes to override one ID
 
 [ ^^ This is not the case anymore L.C. ]
 
-_Loose class names_: one that isn't specific enough for its intended purpose (the `.card`> example)
+Loose class names: 
 
-_The first problem:_ ambiguity 
+one that isn't specific enough for its intended purpose (the `.card`> example)
+
+The first problem:
+
+ambiguity 
 
 > Let’s imagine it means credit card; this class would have been much better had it been `.credit-card-image{}`. A lot longer, yes; a lot better, hell yes!
 
 
-_The second problem:_ can be far to common and prone to be reassigned/redefined.
+The second problem: 
 
-_Loose class names:_
+can be far to common and prone to be reassigned/redefined.
+
+Loose class names:
 
 > All this can be avoided by using much stricter class names. Classes like `card` and `.user` and suchlike are far too loose, making them hard to quickly understand, and easy to accidentally reuse/override."
 
