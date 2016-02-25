@@ -1,4 +1,4 @@
-# css-best-practices
+ß# css-best-practices
 
 Notes on CSS best practices
 
@@ -20,17 +20,19 @@ Large projects that spans for years where maintainability is a real issue:
 
 ### Smells
 
-Undoing styles (apart from in a reset): 
+Undoing styles (apart from in a reset):
 
-Well done CSS should inherit and cascade from previously things defined. Inherit, never undo, having to remove styles might mean that you applied them too early. <i>"As soon as I see CSS that undoes previous styling, I can be pretty sure that it’s because something was poorly architected and that the order in which things were built/written needs a rework."
+Well done CSS should inherit and cascade from previously things defined. ΩßInherit, never undo, having to remove styles might mean that you applied them too early. 
 
-Magic numbers: 
+> "As soon as I see CSS that undoes previous styling, I can be pretty sure that it’s because something was poorly architected and that order in which things were built/written needs a rework."
+
+Magic numbers:
 
 a value that is used 'because it just works' (see the 36px example for the top style on the drop down). Since 'it just works', it is hard to communicate to other developers where the number came from, when someone else is working in our code, then can either delete the magic number (back to square one) or just work her way around it (hacking on top of a hack, increasing the entropy in the code, see http://pragprog.com/the-pragmatic-programmer/extracts/software-entropy.
 
 > "As soon as I see magic numbers in CSS I start asking questions. Why is this here? What does it do? Why does that number work? How can you achieve the same without that magic number?"
 
-Qualified selectors: 
+Qualified selectors:
 
 Selectors who are needlessly prepended to an element, like:
 
@@ -96,7 +98,7 @@ Like when you know (beforehand) that something should always **always** take pre
 }
 ```
 
-Reactive `!important`: 
+Reactive `!important`:
 
 using `!important` to get out of a specific problem, forcing thing in reaction to an issue, is a bad thing.
 
@@ -108,7 +110,7 @@ An ID is 255 times more specific than one class… "http://codepen.io/chriscoyie
 
 [ ^^ This is not the case anymore L.C. ]
 
-Loose class names: 
+Loose class names:
 
 one that isn't specific enough for its intended purpose (the `.card`> example)
 
@@ -119,7 +121,7 @@ ambiguity 
 > Let’s imagine it means credit card; this class would have been much better had it been `.credit-card-image{}`. A lot longer, yes; a lot better, hell yes!
 
 
-The second problem: 
+The second problem:
 
 can be far to common and prone to be reassigned/redefined.
 
