@@ -72,7 +72,7 @@ _Brute forcing:_
 
 _Dangerous selectors:_ selectors with far too broad reach, like applying a very specific selector to all `div` elements.
 
-_Reactive `!important`:
+_Reactive_ `!important`:
 
 > "`!important` should only ever be used proactively, not reactively."
 
