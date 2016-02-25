@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 6.4 (452971)"/><meta name="keywords" content="architecture, css"/><meta name="created" content="2013-07-18 15:31:08 +0000"/><meta name="source" content="web.clip"/><meta name="source-url" content="http://csswizardry.com/2012/11/code-smells-in-css/"/><meta name="updated" content="2015-07-22 22:34:09 +0000"/><title>Code smells in CSS – CSS Wizardry – CSS, OOCSS, front-end architecture, performance and more, by Harry Roberts</title></head><body style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">
+<div>Large projects that spans for years where maintainability is a real issue: <i>"</i><i>when you’re working on one site for months on end, you can’t afford poor code, be it CSS or otherwise, and any bad code needs righting."</i></div>
+<div><i><br/></i></div>
+<div>Smells:</div>
+<div><br/></div>
+<div>
+<ul>
+<li>Undoing styles (apart from in a reset): Well done CSS should inherit and cascade from previously things defined. Inherit, never undo, having to remove styles might mean that you applied them too early. <i>"As soon as I see CSS that undoes previous styling, I can be pretty sure that it’s because something was poorly architected and that the order in which things were built/written needs a rework."</i></li>
+</ul>
+</div>
+<ul>
+<li>Magic numbers: a value that is used 'because it just works' (see the 36px example for the top style on the drop down). Since 'it just works', it is hard to communicate to other developers where the number came from, when someone else is working in our code, then can either delete the magic number (back to square one) or just work her way around it (hacking on top of a hack, increasing the entropy in the code, see <a href="http://pragprog.com/the-pragmatic-programmer/extracts/software-entropy">http://pragprog.com/the-pragmatic-programmer/extracts/software-entropy</a>). <i>"As soon as I see magic numbers in CSS I start asking questions. Why is this here? What does it do? Why does that number work? How can you achieve the same without that magic number?"</i></li>
+<li>Qualified selectors: Selectors who are needlessly prepended to an element, like:
+<ul>
+<li> <font face="Andale Mono">ul.nav{}</font></li>
+<li><font face="Andale Mono">a.button{}</font></li>
+<li><font face="Andale Mono">div.header{}</font></li>
+</ul>
+</li>
+<li>Qualified selectors are bad because:<br/>
+<ul>
+<li>They totally inhibit reusability on another element</li>
+<li>They increase specificity</li>
+<li>They increase browser workload</li>
+</ul>
+</li>
+<li>Qualified selectors: instead use (which can be applied to different elements and facilitates swapping styles when the markup of the site changes):
+<ul>
+<li><font face="Andale Mono">.nav{}</font></li>
+<li><font face="Andale Mono">.button{}</font></li>
+<li><font face="Andale Mono">.header{}</font></li>
+</ul>
+</li>
+<li>Hard coded absolute values: The only example is the absolute value on the line height, which should use a relative value of 1.333:
+<ul>
+<li><font face="Andale Mono">line-height: 1.333;</font></li>
+</ul>
+</li>
+<li><i>"Hard-coded values are not very future proof, flexible or forgiving, and thus should be avoided. The only things that should ever really have hard-coded values are things like sprites which will always need to be a certain size no matter what. As soon as I see a hard-coded unit in a stylesheet I want to know why it was required and how it could be avoided."</i><br/></li>
+<li>Brute forcing: <i>"This one is in a similar vein to hard-coded numbers, but a little more specific. Brute forcing CSS is when you use hard-coded magic numbers and a variety of other techniques to force a layout to work."<img src="Code%20smells%20in%20CSS%20%E2%80%93%20CSS%20Wizardry%20%E2%80%93%20CSS,%20OOCSS,%20front-end%20architecture,%20performance%20and%20more,%20by%20Harry%20Roberts.resources/Screen%20Shot%202013-07-20%20at%2022.51.35.png" height="199" width="539"/></i></li>
+<li>Dangerous selectors: selectors with far too broad reach, like applying a very specific selector to all <font face="Andale Mono">div</font> elements.</li>
+<li>Reactive <font face="Andale Mono">!important</font>:<font face="Andale Mono"> <b><i>"!important</i></b></font> <i style="font-weight: bold;">should only ever be used proactively, not reactively."</i> Like when you know (beforehand) that something should always <b>always</b> take precedence (for example, errors should always be red, no matter what):<img src="Code%20smells%20in%20CSS%20%E2%80%93%20CSS%20Wizardry%20%E2%80%93%20CSS,%20OOCSS,%20front-end%20architecture,%20performance%20and%20more,%20by%20Harry%20Roberts.resources/Screen%20Shot%202013-07-20%20at%2022.59.18.png" height="100" width="535"/></li>
+<li>Reactive <font face="Andale Mono">!important</font>: using <font face="Andale Mono">!important</font> to get out of a specific problem, forcing thing in reaction to an issue, is a bad thing.</li>
+<li>IDs: basically… never use them (but see: <a href="http://css-tricks.com/bad-code-dogmatism-etc/">http://css-tricks.com/bad-code-dogmatism-etc/</a>)
+<ul>
+<li><s>An ID is 255 times more specific than one class…</s></li>
+<li><s><a href="http://codepen.io/chriscoyier/pen/lzjqh">This means you’d need 256 chained classes to override one ID</a>.</s></li>
+<li>^ this has been fixed!</li>
+</ul>
+</li>
+<li>Loose class names: one that isn't specific enough for its intended purpose (the <font face="Andale Mono">.card</font> example)
+<ul>
+<li>The first problem: ambiguity <i>"Let’s imagine it means credit card; this class would have been much better had it been</i> <font face="Andale Mono">.credit-card-image{}</font><i>. A lot longer, yes; a lot better, hell yes!"</i><br/></li>
+<li>The second problem: can be far to common and prone to be reassigned/redefined.</li>
+</ul>
+</li>
+<li>Loose class names: <i>"All this can be avoided by using much stricter class names. Classes like</i> <font face="Andale Mono">.card</font> <i>and</i> <font face="Andale Mono">.user</font> <i>and suchlike are far too loose, making them hard to quickly understand, and easy to accidentally reuse/override."</i></li>
+</ul>
+<div> </div>
+<div><br/></div>
+<img src="Code%20smells%20in%20CSS%20%E2%80%93%20CSS%20Wizardry%20%E2%80%93%20CSS,%20OOCSS,%20front-end%20architecture,%20performance%20and%20more,%20by%20Harry%20Roberts.resources/9862345F-8186-4CF7-9733-608BC81DE6A2.png" height="128" width="128"/><a shape="rect" title="Code smells in CSS – CSS Wizardry – CSS, OOCSS, front-end architecture, performance and more, by Harry Roberts" style="font-size: 12pt; display: inline;" href="http://csswizardry.com/2012/11/code-smells-in-css/">http://csswizardry.com/2012/11/code-smells-in-css/</a></body></html>
